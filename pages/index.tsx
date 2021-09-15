@@ -1,3 +1,4 @@
+import { GetStaticProps, GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
@@ -12,9 +13,15 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-         Welcome to <a href={void(0)}>iBurger!</a>
+         Welcome to <span>iBurger!</span>
         </h1>
       </main>
     </section>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {},
+  }
 }
