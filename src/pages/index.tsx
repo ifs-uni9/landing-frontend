@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPropsContext } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
@@ -6,9 +6,9 @@ export default function Home() {
   return (
     <section className={styles.container}>
       <Head>
-        <title>iBurger - Keep working</title>
+        <title>iBurger - Administre sua hamburgueria de forma eficiente com a plataforma iBurger</title>
         <meta charSet="UTF-8" />
-        <meta name="description" content="A beautiful and resilient managing tool for your hamburger" />
+        <meta name="description" content="Nunca foi tão fácil administrar seu negócio, com o iBurger você faz isso de forma eficiente, simples e segura." />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#FF5473" />
@@ -19,7 +19,7 @@ export default function Home() {
         <meta property="og:title" content="IBurger" />
         <meta
           property="og:description"
-          content="Administre sua hamburgueria com segurança e eficiencia com a Iburger!"
+          content="Nunca foi tão fácil administrar seu negócio, com o iBurger você faz isso de forma eficiente, simples e segura."
         />
         <meta property="og:type" content="text/html; charset=iso-8859-1" />
         <meta property="og:url" content="https://iburger.vercel.app/" />
@@ -27,27 +27,27 @@ export default function Home() {
           property="og:image"
           content=""
         />
-        <meta property="og:site_name" content="Iburger" />
+        <meta property="og:site_name" content="iBurger" />
         <meta property="og:locale" content="pt_BR" />
-        <meta property="twitter:title" content="Iburger - hamburgueria" />
+        <meta property="twitter:title" content="iBurger - Administre sua hamburgueria de forma eficiente, simples e  segura." />
         <meta
           property="twitter:description"
           content=""
         />
         <meta
           property="twitter:description"
-          content="Administre sua hamburgueria com segurança eficiencia com a Iburger!"
+          content="Administre sua hamburgueria com eficiencia e simplicidade com a iBurger"
         />
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Iburger" />
-        <meta name="copyright" content="©️2020 Iburger" />
+        <meta name="author" content="iBurger" />
+        <meta name="copyright" content="©️2020 - iBurger" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-         Welcome to <span>iBurger!</span>
+         Eficiente, simples e seguro.
         </h1>
-        <p>Administre </p>
+        <p>Administre sua hamburgueria com segurança eficiencia com a plataforma iBurger</p>
       </main>
     </section>
   )
