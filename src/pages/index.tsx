@@ -8,10 +8,17 @@ export default function Home() {
       <Head>
         <title>iBurger - Administre sua hamburgueria de forma eficiente com a plataforma iBurger</title>
         <meta charSet="UTF-8" />
-        <meta name="description" content="Nunca foi tão fácil administrar seu negócio, com o iBurger você faz isso de forma eficiente, simples e segura." />
-        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#FF5473" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+        <link rel="manifest" href="/site.webmanifest"/>
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#da532c"/>
+        <meta name="msapplication-TileColor" content="#da532c"/>
+        <meta name="theme-color" content="#ffffff"/>
+      
+        <meta name="description" content="Nunca foi tão fácil administrar seu negócio, com o iBurger você faz isso de forma eficiente, simples e segura." />
         <meta
           name="keywords"
           content="iburger, app iburger, app, app para hamburguerias, adiministração de hamburgueria, administração, hamburgueria, restaurante hamburgueria, restaurante, saas"
