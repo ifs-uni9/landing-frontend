@@ -1,10 +1,12 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import FeaturesSection from '../components/features/FeaturesSection'
+import FooterSection from '../components/footer/FooterSection'
+import HeroSection from '../components/hero/HeroSection'
 
 export default function Home() {
   return (
-    <section className={styles.container}>
+    <main>
       <Head>
         <title>iBurger - Administre sua hamburgueria de forma eficiente com a plataforma iBurger</title>
         <meta charSet="UTF-8" />
@@ -50,18 +52,9 @@ export default function Home() {
         <meta name="copyright" content="©️2020 - iBurger" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-         Eficiente, simples e seguro.
-        </h1>
-        <p>Administre sua hamburgueria com segurança eficiencia com a plataforma iBurger</p>
-      </main>
-    </section>
+      <HeroSection />
+      <FeaturesSection />
+      <FooterSection />
+    </main>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  return {
-    props: {},
-  }
 }
