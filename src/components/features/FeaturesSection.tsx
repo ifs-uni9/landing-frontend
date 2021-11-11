@@ -4,8 +4,8 @@ function FeaturesSection() {
     return (
         <section id="features" className="py-20 bg-white">
             <div className="container max-w-6xl mx-auto">
-                <h2 className="text-4xl font-bold tracking-tight text-center">Our Features</h2>
-                <p className="mt-2 text-lg text-center text-gray-600">Check out our list of awesome features below.</p>
+                <h2 className="text-4xl font-bold tracking-tight text-center">Funcionalidades</h2>
+                <p className="mt-2 text-lg text-center text-gray-600">Confira nossa lista de recursos incríveis abaixo.</p>
                 <div className="grid grid-cols-4 gap-8 mt-10 sm:grid-cols-8 lg:grid-cols-12 sm:px-8 xl:px-0">
 
                     <div className="relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 sm:rounded-xl">

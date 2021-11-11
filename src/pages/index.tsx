@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main>
       <Head>
-        <title>iBurger - Administre sua hamburgueria de forma eficiente com a plataforma iBurger</title>
+        <title>iBurger - Gerencie sua hamburgueria de forma eficiente com a plataforma iBurger</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
