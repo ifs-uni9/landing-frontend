@@ -25,7 +25,7 @@ function HeroSection() {
               }
             >
               <div className="flex-col w-full h-auto overflow-hidden bg-white rounded-lg select-none md:bg-transparent md:rounded-none md:relative md:flex md:flex-row md:overflow-auto">
-                <div className="flex flex-col items-center justify-center w-full h-full mt-12 text-center text-brand-400 md:text-brand-200 md:w-2/3 md:mt-0 md:flex-row md:items-center">
+                <div className="flex flex-col items-center justify-center w-full h-full mt-12 text-center text-brand-50 md:text-brand-50 md:w-2/3 md:mt-0 md:flex-row md:items-center">
                   <a
                     href="#home"
                     className="inline-block px-4 py-2 mx-2 font-medium text-left text-brand-400 md:text-white md:px-0 lg:mx-3 md:text-center"
@@ -87,7 +87,7 @@ function HeroSection() {
               com segurança e eficiência
             </span>
           </h1>
-          <div className="max-w-lg mx-auto mt-6 text-sm text-center text-brand-200 md:mt-12 sm:text-base md:max-w-xl md:text-lg xl:text-xl">
+          <div className="max-w-lg mx-auto mt-6 text-sm text-center text-brand-100 md:mt-12 sm:text-base md:max-w-xl md:text-lg xl:text-xl">
             Se você está procurando uma solução para a sua empresa, 
             fique por dentro do lançamento através do seu e-mail!
           </div>
@@ -96,19 +96,19 @@ function HeroSection() {
               type="text"
               name="email"
               placeholder="Endereço de e-mail"
-              className="w-full h-12 px-6 py-2 font-medium text-brand-400 focus:outline-none"
+              className="w-full h-12 px-6 py-2 font-medium text-gray-900 focus:outline-none"
             />
             <span className="relative top-0 right-0 block">
               <button
                 type="button"
-                className="inline-flex items-center w-32 h-12 px-8 text-base font-bold leading-6 text-white transition duration-150 ease-in-out bg-brand-400 border border-transparent hover:bg-brand-700 focus:outline-none active:bg-brand-700"
+                className="inline-flex items-center w-32 h-12 px-8 text-base font-bold leading-6 text-white transition duration-150 ease-in-out bg-gray-900 border border-transparent hover:bg-gray-800 focus:outline-none active:bg-gray-800"
               >
                 Enviar
               </button>
             </span>
           </div>
-          <div className="mt-8 text-sm text-brand-200">
-            Ao se inscrever, você concorda com nossos <Link href={"/terms"}>termos e serviços.</Link>
+          <div className="mt-8 text-sm text-brand-100">
+            Ao se inscrever, você concorda com nossos <span className="hover:underline"><Link href={"/terms"}>termos e serviços.</Link></span> 
           </div>
         </div>
       </div>
