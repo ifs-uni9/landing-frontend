@@ -49,34 +49,37 @@ function HeroSection() {
                 (showMenu ? "text-gray-400" : "text-gray-100")
               }
             >
-              <svg
-                className="w-6 h-6"
-                x-show="!showMenu"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                x-cloak=""
-              >
-                <path d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-              <svg
-                className="w-6 h-6"
-                x-show="showMenu"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                x-cloak=""
-              >
-                <path
+              {showMenu ? (
+                <svg
+                  className="w-6 h-6"
+                  x-show="showMenu"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  x-cloak=""
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+              ) : (
+                <svg
+                  className="w-6 h-6"
+                  x-show="!showMenu"
+                  fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  x-cloak=""
+                >
+                  <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              )}
             </div>
           </div>
         </nav>
@@ -88,8 +91,8 @@ function HeroSection() {
             </span>
           </h1>
           <div className="max-w-lg mx-auto mt-6 text-sm text-center text-brand-100 md:mt-12 sm:text-base md:max-w-xl md:text-lg xl:text-xl">
-            Se você está procurando uma solução para a sua empresa, 
-            fique por dentro do lançamento através do seu e-mail!
+            Se você está procurando uma solução para a sua empresa, fique por
+            dentro do lançamento através do seu e-mail!
           </div>
           <div className="relative flex items-center max-w-md mx-auto mt-12 overflow-hidden text-center rounded-full">
             <input
@@ -108,7 +111,10 @@ function HeroSection() {
             </span>
           </div>
           <div className="mt-8 text-sm text-brand-100">
-            Ao se inscrever, você concorda com nossos <span className="hover:underline"><Link href={"/terms"}>termos e serviços.</Link></span> 
+            Ao se inscrever, você concorda com nossos{" "}
+            <span className="hover:underline">
+              <Link href={"/terms"}>termos e serviços.</Link>
+            </span>
           </div>
         </div>
       </div>
