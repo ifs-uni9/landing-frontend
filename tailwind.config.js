@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: {
+        "hero-background": "url(../../public/background.jpg)",
+      },
       colors: {
         brand: "#FF6363",
         "brand-50": "#FFE6E6",
