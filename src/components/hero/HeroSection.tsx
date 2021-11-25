@@ -25,9 +25,10 @@ function HeroSection() {
     const hasError = error && email === "";
 
     if(!hasError && hasCaptchaToken) {
-
       toast.success("Email enviado com sucesso!");
+      
       captchaRef.current?.resetCaptcha();
+      setEmail("")
       setError(null)
     } else {
       if(email === "") {
