@@ -1,14 +1,48 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 function HeroSection() {
   const [showMenu, setShowMenu] = useState(false);
+  const [email, setEmail] = useState("");
+  const [hasCaptchaToken, setHasCaptchaToken] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const captchaRef = useRef<HCaptcha>(null);
+
   const onShowMenuClicked = useCallback(() => {
     setShowMenu(!showMenu);
   }, [showMenu]);
 
+  const onVerifyCaptcha = useCallback((token) => {
+    setHasCaptchaToken(Boolean(token))
+  }, [])
+
+  const onClickSend = useCallback(() => {
+    console.debug(email);
+
+    const hasError = error && email === "";
+
+    if(!hasError && hasCaptchaToken) {
+
+      toast.success("Email enviado com sucesso!");
+      captchaRef.current?.resetCaptcha();
+      setError(null)
+    } else {
+      if(email === "") {
+        setError("Por favor, insira um e-mail válido.")
+      } else if(!hasCaptchaToken) {
+        setError("Por favor, verifique o captcha.")
+      }
+    }
+  }, [email, error, hasCaptchaToken]);
+
   return (
-    <section id="home" className="w-full px-3 antialiased bg-hero-background lg:px-6">
+    <section
+      id="home"
+      className="w-full px-3 antialiased bg-hero-background lg:px-6"
+    >
       <div className="mx-auto max-w-7xl">
         <nav className="flex items-center w-full h-24 select-none">
           <div className="relative flex flex-wrap items-center justify-between w-full h-24 mx-auto font-medium md:justify-center">
@@ -94,10 +128,12 @@ function HeroSection() {
             Se você está procurando uma solução para a sua empresa, fique por
             dentro do lançamento através do seu e-mail!
           </div>
-          <form className="relative flex items-center max-w-md mx-auto mt-12 overflow-hidden text-center rounded-full">
+          <form className={(error ? "border-red-600 border-2 " : "border-none ") + "relative flex items-center max-w-md mx-auto mt-12 overflow-hidden text-center rounded-full"}>
             <input
               type="text"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Endereço de e-mail"
               className="w-full h-12 px-6 py-2 font-medium text-gray-900 focus:outline-none"
             />
@@ -105,16 +141,26 @@ function HeroSection() {
               <button
                 type="button"
                 className="inline-flex items-center w-32 h-12 px-8 text-base font-bold leading-6 text-white transition duration-150 ease-in-out bg-brand border border-transparent hover:bg-brand-500 focus:outline-none active:bg-brand-800"
+                onClick={onClickSend}
               >
                 Enviar
               </button>
             </span>
           </form>
-          <div className="mt-8 text-sm text-gray-100">
+          {error && <p className={"mt-2 text-red-600"}>{error}</p>}
+
+          <div className="flex flex-col items-center mt-8 text-sm text-gray-100">
+            <HCaptcha
+              sitekey={process.env.NEXT_PUBLIC_HCATPCHA_SITE_KEY as string}
+              ref={captchaRef}
+              onVerify={onVerifyCaptcha}
+            />
+            <p className="mt-8">
             Ao se inscrever, você concorda com nossos{" "}
             <span className="hover:underline">
               <Link href={"/terms"}>termos e serviços.</Link>
             </span>
+            </p>
           </div>
         </div>
       </div>
