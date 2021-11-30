@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import axios from "axios";
 
 function HeroSection() {
   const [showMenu, setShowMenu] = useState(false);
@@ -17,22 +18,35 @@ function HeroSection() {
 
   const onVerifyCaptcha = useCallback((token) => {
     setCaptchaToken(token);
-  }, [])
+  }, []);
 
-  const onClickSend = useCallback(() => {
+  const onClickSend = useCallback(async () => {
     const hasError = error && email === "";
 
-    if(!hasError && captchaToken) {
-      toast.success("Email enviado com sucesso!");
-      
-      captchaRef.current?.resetCaptcha();
-      setEmail("")
-      setError(null)
+    if (!hasError && captchaToken) {
+      try {
+        const {data} = await axios.post("/api/mail", {
+          email,
+          response: captchaToken,
+        });
+        
+        if (data.code === "success") {
+          setError(null);
+          toast.success("Email sent successfully");
+          setEmail("");
+          setCaptchaToken("");
+          captchaRef.current?.resetCaptcha();
+        } else {
+          setError(data.message);
+          captchaRef.current?.resetCaptcha();
+        }
+      } catch (err: any) {
+        setError("Something went wrong");
+        captchaRef.current?.resetCaptcha();
+      }
     } else {
-      if(email === "") {
-        setError("Por favor, insira um e-mail válido.")
-      } else if(!captchaToken) {
-        setError("Por favor, verifique o captcha.")
+      if (!captchaToken) {
+        setError("Por favor, verifique o captcha.");
       }
     }
   }, [email, error, captchaToken]);
@@ -127,11 +141,17 @@ function HeroSection() {
             Se você está procurando uma solução para a sua empresa, fique por
             dentro do lançamento através do seu e-mail!
           </div>
-          <form className={(error ? "border-red-600 border-2 " : "border-none ") + "relative flex items-center max-w-md mx-auto mt-12 overflow-hidden text-center rounded-full"}>
+          <form
+            className={
+              (error ? "border-red-600 border-2 " : "border-none ") +
+              "relative flex items-center max-w-md mx-auto mt-12 overflow-hidden text-center rounded-full"
+            }
+          >
             <input
               type="text"
               name="email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Endereço de e-mail"
               className="w-full h-12 px-6 py-2 font-medium text-gray-900 focus:outline-none"
@@ -148,17 +168,17 @@ function HeroSection() {
           </form>
           {error && <p className={"mt-2 text-red-600"}>{error}</p>}
 
-          <div className="flex flex-col items-center mt-8 text-sm text-gray-100">
+          <div className="flex flex-col items-center mt-4 text-sm text-gray-100">
             <HCaptcha
               sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY as string}
               ref={captchaRef}
               onVerify={onVerifyCaptcha}
             />
-            <p className="mt-8">
-            Ao se inscrever, você concorda com nossos{" "}
-            <span className="hover:underline">
-              <Link href={"/terms"}>termos e serviços.</Link>
-            </span>
+            <p className="mt-2">
+              Ao se inscrever, você concorda com nossos{" "}
+              <span className="hover:underline">
+                <Link href={"/terms"}>termos e serviços.</Link>
+              </span>
             </p>
           </div>
         </div>
