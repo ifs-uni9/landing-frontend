@@ -6,7 +6,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 function HeroSection() {
   const [showMenu, setShowMenu] = useState(false);
   const [email, setEmail] = useState("");
-  const [hasCaptchaToken, setHasCaptchaToken] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const captchaRef = useRef<HCaptcha>(null);
@@ -16,15 +16,13 @@ function HeroSection() {
   }, [showMenu]);
 
   const onVerifyCaptcha = useCallback((token) => {
-    setHasCaptchaToken(Boolean(token))
+    setCaptchaToken(token);
   }, [])
 
   const onClickSend = useCallback(() => {
-    console.debug(email);
-
     const hasError = error && email === "";
 
-    if(!hasError && hasCaptchaToken) {
+    if(!hasError && captchaToken) {
       toast.success("Email enviado com sucesso!");
       
       captchaRef.current?.resetCaptcha();
@@ -33,11 +31,11 @@ function HeroSection() {
     } else {
       if(email === "") {
         setError("Por favor, insira um e-mail válido.")
-      } else if(!hasCaptchaToken) {
+      } else if(!captchaToken) {
         setError("Por favor, verifique o captcha.")
       }
     }
-  }, [email, error, hasCaptchaToken]);
+  }, [email, error, captchaToken]);
 
   return (
     <section
@@ -152,7 +150,7 @@ function HeroSection() {
 
           <div className="flex flex-col items-center mt-8 text-sm text-gray-100">
             <HCaptcha
-              sitekey={process.env.NEXT_PUBLIC_HCATPCHA_SITE_KEY as string}
+              sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY as string}
               ref={captchaRef}
               onVerify={onVerifyCaptcha}
             />
