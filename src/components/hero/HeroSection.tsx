@@ -3,12 +3,24 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import axios from "axios";
+import Lottie, {Options} from "react-lottie";
+import * as animationData from "../../assets/loading.json";
+
+const lottieDefaultOptions: Options = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice'
+  },
+};
 
 function HeroSection() {
   const [showMenu, setShowMenu] = useState(false);
   const [email, setEmail] = useState("");
   const [captchaToken, setCaptchaToken] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const captchaRef = useRef<HCaptcha>(null);
 
@@ -23,6 +35,7 @@ function HeroSection() {
   const onClickSend = useCallback(async () => {
     const hasError = error && email === "";
 
+    setLoading(true);
     if (!hasError && captchaToken) {
       try {
         const {data} = await axios.post("/api/mail", {
@@ -32,21 +45,28 @@ function HeroSection() {
         
         if (data.code === "success") {
           setError(null);
-          toast.success("Email sent successfully");
+          toast.success("Email enviado! Aguarde nosso contato.");
           setEmail("");
           setCaptchaToken("");
           captchaRef.current?.resetCaptcha();
         } else {
+          setLoading(false);
           setError(data.message);
+          
           captchaRef.current?.resetCaptcha();
         }
       } catch (err: any) {
-        setError("Something went wrong");
+        setLoading(false);
+        setError("Opa! Parece que algo saiu errado. Tente novamente.");
+        captchaRef.current?.resetCaptcha();
+      } finally {
+        setLoading(false);
         captchaRef.current?.resetCaptcha();
       }
     } else {
       if (!captchaToken) {
         setError("Por favor, verifique o captcha.");
+        setLoading(false);
       }
     }
   }, [email, error, captchaToken]);
@@ -167,6 +187,11 @@ function HeroSection() {
             </span>
           </form>
           {error && <p className={"mt-2 text-red-600"}>{error}</p>}
+          {loading && <Lottie options={lottieDefaultOptions}
+                              isStopped={!loading}
+                              width={120}
+                              isClickToPauseDisabled
+                              isPaused={!loading}/>}
 
           <div className="flex flex-col items-center mt-4 text-sm text-gray-100">
             <HCaptcha
